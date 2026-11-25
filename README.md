@@ -72,7 +72,13 @@ A8-д параметр бүр өөр алдааны салаагаар ажил�
 | 2 | `repository.saveRegistration(...)` дуудалтыг авч хаясан | `activeStudent_registeringReturnsOkAndSavesAndEmails`; `emailSenderThrows_registrationStillReturnsOkAndSaves` | `results/mvn-test-mutant-2.txt` — 10 тестээс 2 failure, `BUILD FAILURE` |
 | 3 | эхний нөхцөлөөс `|| courseId == null` хэсгийг авч хаясан | `nullArgument_registerThrowsWithoutDependencyInteractions` | `results/mvn-test-mutant-3.txt` — 10 тестээс 1 failure, `BUILD FAILURE` |
 
-Мутаци бүрийн дараа эх кодыг сэргээсэн; эцсийн `src/main` нь starter төслийн эх хувилбартай таарна. Мутант 3 нь A6 эхэндээ зөвхөн `studentId`-ийн null-ийг шалгаж байсныг илрүүлсэн тул тестийг хоёр аргументын null тохиолдлыг тус тус шалгадаг болгож зассан.
+Мутаци бүрийн дараа эх кодыг сэргээсэн; эцсийн `src/main` нь starter төслийн эх хувилбартай таарна.
+
+**Мутант 1.** Идэвхгүй оюутны шалгалтыг хасахад A3 `ERROR_INACTIVE_STUDENT` хүлээж байсан ч `ERROR_NO_COURSE` авсан. Учир нь энэ тестийн mock хичээл байгаа эсэхийг stub хийгээгүй тул Mockito-ийн анхдагч `false` утгаар дараагийн салаа ажилласан.
+
+**Мутант 2.** `saveRegistration`-ийг хасахад A1 болон A5 хадгалалтын дуудлагыг `verify` хийдэг тул хоёул `Wanted but not invoked` алдаагаар унасан.
+
+**Мутант 3.** A6 хоёр тусдаа `assertThrows`-оор `studentId == null` болон `courseId == null` тохиолдлыг шалгадаг. Нөхцөлөөс `courseId == null`-ийг авахад эхний шалгалт тэнцсэн боловч хоёр дахь нь exception аваагүй тул A6 унасан; энэ нь хоёр null оролт хоёулаа шалгагдсаныг батална.
 
 ## Дүгнэлт
 
